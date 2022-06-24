@@ -11,10 +11,10 @@ Open Powershell with Admin Privilege
 
 Paste this command in Powershell
 
-iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/sevurdbox'))
+iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/s-toolbox'))
 
 Or,
 
-iwr -useb https://bit.ly/sevurdbox | iex
+iwr -useb https://bit.ly/s-toolbox | iex
 
 A shortcut of the script will be created  automatically on Desktop. You can run the scipt from there anytime.
