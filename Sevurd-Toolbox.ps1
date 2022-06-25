@@ -1433,7 +1433,7 @@ $win10tweaks.Add_Click({
     "vmicvmsession"
     "vmicrdv"
     "vmictimesync" 
-    "WSearch"
+    
     
     )
 
@@ -1981,7 +1981,7 @@ $win11tweaks.Add_Click({
     "vmicvmsession"
     "vmicrdv"
     "vmictimesync" 
-    "WSearch"
+    
     
     )
 
