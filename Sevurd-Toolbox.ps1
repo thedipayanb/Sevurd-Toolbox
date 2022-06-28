@@ -633,7 +633,7 @@ $vlc.Add_Click({
 $firefox.Add_Click({
     Write-Host "Installing Firefox"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Firefox... Please Wait" 
-    choco install firefox --params "/TaskbarShortcut /DesktopShortcut /NoMaintenanceService" -y -f | Out-Host
+    choco install firefox --params "/TaskbarShortcut /DesktopShortcut /NoMaintenanceService" -y -f --ignore-checksums | Out-Host
     if($?) { Write-Host "Installed Firefox" }
     $ResultText.text = "`r`n" + "Finished Installing Firefox" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
@@ -641,7 +641,7 @@ $firefox.Add_Click({
 $brave.Add_Click({
     Write-Host "Installing Brave Browser"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Brave... Please Wait" 
-    choco install brave -y -f | Out-Host
+    choco install brave -y -f --ignore-checksums | Out-Host
     if($?) { Write-Host "Installed Brave Browser" }
     $ResultText.text = "`r`n" + "Finished Installing Brave" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
@@ -649,7 +649,7 @@ $brave.Add_Click({
 $gchrome.Add_Click({
     Write-Host "Installing Google Chrome"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Google Chrome... Please Wait" 
-    choco install googlechrome -y -f | Out-Host
+    choco install googlechrome -y -f --ignore-checksums | Out-Host
     if($?) { Write-Host "Installed Google Chrome" }
     $ResultText.text = "`r`n" + "Finished Installing Google Chrome" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
