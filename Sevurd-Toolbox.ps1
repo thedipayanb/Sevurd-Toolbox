@@ -459,6 +459,13 @@ $blockthespot.Height             = 30
 $blockthespot.Location           = New-Object System.Drawing.Point(3,825)
 $blockthespot.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
 
+$uac                 		 = New-Object system.Windows.Forms.Button
+$uac.Text         	         = "Disable UAC"
+$uac.Width           		 = 205
+$uac.Height            		 = 30
+$uac.Location         		 = New-Object System.Drawing.Point(3,860)
+$uac.Font              		 = New-Object System.Drawing.Font('Microsoft Sans Serif',12)
+
 $Label30                         = New-Object system.Windows.Forms.Label
 $Label30.text                    = "Controls"
 $Label30.AutoSize                = $true
@@ -605,7 +612,7 @@ $Label10.Font                    = New-Object System.Drawing.Font('Microsoft San
 
 $Form.controls.AddRange(@($Label3,$Panel2,$PictureBox1,$Panel1,$Label30,$Label15,$Panel4,$Label1,$Panel3,$ResultText,$Label10,$Panel5))
 $Panel1.controls.AddRange(@($Label2,$brave,$firefox,$7zip,$whatsapp,$nvidia,$notepad,$gchrome,$valorant,$origin,$ubisoft,$directx,$msimode,$visualc,$nvcleanstall,$rufus,$ddu,$sdio,$steam,$Label7,$Label8,$Label9,$putty,$autoruns,$spotify,$discord,$vlc))
-$Panel2.controls.AddRange(@($Label5,$win10tweaks,$win11tweaks,$cleanup,$DDefender,$EDefender,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$removebloat,$WarningLabel,$appearancefx,$STrayIcons,$laptopnumlock,$yourphonefix,$blockthespot))
+$Panel2.controls.AddRange(@($Label5,$win10tweaks,$win11tweaks,$cleanup,$DDefender,$EDefender,$backgroundapps,$cortana,$actioncenter,$darkmode,$performancefx,$onedrive,$lightmode,$EActionCenter,$ECortana,$RBackgroundApps,$HTrayIcons,$removebloat,$WarningLabel,$appearancefx,$STrayIcons,$laptopnumlock,$yourphonefix,$blockthespot,$uac))
 $Panel3.controls.AddRange(@($ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$oldpower,$restorepower,$winservices,$devicemgr,$programs))
 $Panel4.controls.AddRange(@($defaultwindowsupdate,$securitywindowsupdate,$windowsupdatefix,$disableupdates,$enableupdates,$Label12))
 $Panel5.Controls.AddRange(@($Label31,$vscode,$github,$git,$powershell7))
@@ -1088,7 +1095,6 @@ $win10tweaks.Add_Click({
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Name "EnableFeeds" -Type DWord -Value 0
     
 
-
     # remove "Meet Now" button from taskbar
 
     If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer")) {
@@ -1447,7 +1453,6 @@ $win10tweaks.Add_Click({
     # Sevice tweaks to Disabled
 
     $services = @(
-    "BthAvctpSvc"				                # Disables AVCTP service (if you use  Bluetooth Audio Device or Wireless Headphones. then don't disable this)
     "DPS"					                    # Diagonistic Policy Service
     "dmwappushservice"				            # WAP Push Message Routing Service (see known issues)
     "edgeupdate"                                # Disables one of edge update service  
@@ -1456,7 +1461,6 @@ $win10tweaks.Add_Click({
     "GoogleChromeElevationService"              
     "lfsvc"					                    # Geolocation Service
     "RpcLocator"                                # Remote Procedure Call Locator
-    "WpnService"                                # Disables WpnService (Push Notifications may not work )
     "XblAuthManager"                            # Xbox Live Auth Manager
     "XblGameSave"                               # Xbox Live Game Save Service
     "XboxNetApiSvc"                             # Xbox Live Networking Service
@@ -1995,7 +1999,6 @@ $win11tweaks.Add_Click({
     # Sevice tweaks to Disabled
 
     $services = @(
-    "BthAvctpSvc"				    # Disables AVCTP service (if you use  Bluetooth Audio Device or Wireless Headphones. then don't disable this)
     "DPS"
     "dmwappushservice"
     "edgeupdate"                                    # Disables one of edge update service  
@@ -2004,7 +2007,6 @@ $win11tweaks.Add_Click({
     "GoogleChromeElevationService"
     "lfsvc"
     "RpcLocator"
-    "WpnService"                                    #Disables WpnService (Push Notifications may not work )
     "XblAuthManager"                               # Xbox Live Auth Manager
     "XblGameSave"                                  # Xbox Live Game Save Service
     "XboxNetApiSvc"                                # Xbox Live Networking Service
@@ -2565,9 +2567,17 @@ $yourphonefix.Add_Click({
 $blockthespot.Add_Click({
     Write-Host "Installing script"
     $ResultText.text = "`r`n" +"`r`n" + "Installing script"
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-Expression "& { $(Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/mrpond/BlockTheSpot/master/install.ps1') } -UninstallSpotifyStoreEdition -RemoveAdPlaceholder"
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; iex "& { $((iwr -useb 'https://raw.githubusercontent.com/amd64fox/SpotX/main/Install.ps1').Content) } -confirm_uninstall_ms_spoti -confirm_spoti_recomended_over -podcasts_on -cache_off -block_update_off -exp_standart -hide_col_icon_off -start_spoti"
     Write-Host "Blocked Spotify Ads"
     $ResultText.text = "`r`n" +"`r`n" + "Blocked Spotify Ads"
+})
+
+$uac.Add_Click({
+    Write-Host "Disabling UAC"
+    $ResultText.text = "`r`n" +"`r`n" + "Disabling UAC"
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "EnableLUA" -Type DWord -Value 0
+    Write-Host "Disabled UAC...Restart"
+    $ResultText.text = "`r`n" +"`r`n" + "Disabled UAC...Restart"
 })
 
 $programs.Add_Click({
