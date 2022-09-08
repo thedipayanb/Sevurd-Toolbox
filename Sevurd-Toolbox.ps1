@@ -874,6 +874,8 @@ $powershell7.Add_Click({
 })
 
 $win10tweaks.Add_Click({
+    Write-Host "Making Windows 10 BETTER"
+    $ResultText.text = "`r`n" + "Making Windows 10 BETTER" 
     Write-Host "Creating Restore Point incase something bad happens"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Essential Tools... Please Wait" 
     Enable-ComputerRestore -Drive "C:\"
@@ -1501,6 +1503,8 @@ $win10tweaks.Add_Click({
 })
 
 $win11tweaks.Add_Click({
+    Write-Host "Making Windows 11 BETTER"
+    $ResultText.text = "`r`n" + "Making Windows 11 BETTER" 
     Write-Host "Creating Restore Point incase something bad happens"
     $ResultText.text = "`r`n" +"`r`n" + "Installing Essential Tools... Please Wait" 
     Enable-ComputerRestore -Drive "C:\"
